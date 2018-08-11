@@ -26,3 +26,56 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Form {
+  text-align: left;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+* {
+  box-sizing: border-box;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=text] {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+.col-35 {
+  float: left;
+  width: 35%;
+  margin-top: 6px;
+}
+
+.col-65 {
+  float: left;
+  width: 65%;
+  margin-top: 6px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .col-35, .col-65, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+  }
+}
