@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ProductForm from './product-form/product-form';
+import ProductItem from './product-item/product-item'
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
           <h1 className="App-title">Amazon Reviews Analytics</h1>
         </header>
         <main>
-          <ProductForm />
+          <ProductForm/>
+          <ProductItem asin={'JSKDJ'} name={'some name'}/>
         </main>
       </div>
     );
