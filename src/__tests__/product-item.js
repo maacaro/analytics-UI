@@ -9,15 +9,25 @@ afterEach(cleanup)
 describe("ProductItem",()=>{
     it('should display name and asin', async ()=>{
         const url = "https://app.scrapinghub.com/api/run.json"
-        axios.post.mockImplementationOnce(() => Promise.resolve({status: 'OK', jobId:'34443'}));
-        const product = {
-            asin: "product asin",
-            name: "product name"
+        const data ={
+            "project": "320403",
+            "spider": "amazon-reviews-spider",
+            "asin": "1563118793"
         }
-        const {getByText} = render(<ProductItem product={product}/>)
+
+        const headers = {
+            "authorization": "Basic OTczZDlkOWFhN2NiNDkwMGFjYjU4M2IzYmQyOGQ4MDc6T1RjelpEbGtPV0ZoTjJOaU5Ea3dNR0ZqWWpVNE0ySXpZbVF5T0dRNE1EYzY=",
+            "content-type": "application/x-www-form-urlencoded",
+            "cache-control": "no-cache",
+        }
+
+        const { getByText } = render(<ProductItem asin={"1563118793"} name={"Ford book"}/>)
+        
+        axios.post.mockImplementationOnce(() => Promise.resolve({status: 'OK', jobId:'34443'}));
         
         fireEvent.click(getByText('Crawl'))
         
-
+        expect(axios.post).toHaveBeenCalledTimes(1)
+        expect(axios.post).toHaveBeenCalledWith(url,data,headers)
     })
 })
