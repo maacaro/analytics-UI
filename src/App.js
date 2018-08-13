@@ -14,7 +14,7 @@ class App extends Component {
         </header>
         <main>
           <ProductForm/>
-          <ProductItem asin={'JSKDJ'} name={'some name'}/>
+          <ProductItem asin={'1563118793'} name={'some name'}/>
         </main>
       </div>
     );
