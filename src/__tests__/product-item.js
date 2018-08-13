@@ -7,7 +7,7 @@ import ProductItem from '../product-item/product-item'
 afterEach(cleanup)
 
 describe("ProductItem",()=>{
-    it('should display name and asin', async ()=>{
+    it('should make an  scrapy API call', async ()=>{
         const url = "https://app.scrapinghub.com/api/run.json"
         const data ="project=320403&spider=amazon-reviews-spider&asin=1563118793"
 
@@ -24,5 +24,18 @@ describe("ProductItem",()=>{
         
         expect(axios.post).toHaveBeenCalledTimes(1)
         expect(axios.post).toHaveBeenCalledWith(url,data,{ headers })
+    })
+
+    it('should make an API call to the products/{asin}/reviews/analyze endpoint, when the user click on the analyze button',async()=>{
+        const asin = '1563118793'
+        const url = "https://maacaro-analytics-api.herokuapp.com/products/"+asin+"/reviews/analyze"
+        const { getByText } = render(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
+        axios.get.mockImplementationOnce(() => Promise.resolve({asin, entities:["list of entities"], sentiment:["sentiment object"]}));
+
+        fireEvent.click(getByText('Analyze'))
+        wait()
+
+        expect(axios.get).toHaveBeenCalledTimes(1)
+        expect(axios.get).toHaveBeenCalledWith(url)
     })
 })

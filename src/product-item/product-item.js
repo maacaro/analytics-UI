@@ -3,7 +3,11 @@ import axios from 'axios';
 import qs from 'qs';
 
 export default class ProductItem extends React.Component{
-    handleOnClick = () =>{
+    handleOnClickAnalyze= async () => {
+        const url = "https://maacaro-analytics-api.herokuapp.com/products/"+this.props.asin+"/reviews/analyze"
+        const analytics = await axios.get(url);
+    }
+    handleOnClickCrawl = () =>{
         const url = "https://app.scrapinghub.com/api/run.json"
         const headers = {
             'content-type': 'application/x-www-form-urlencoded',
@@ -22,8 +26,8 @@ export default class ProductItem extends React.Component{
         return(
             <div>
                 <label>{asin} {name}</label>
-                <button onClick={this.handleOnClick}>Crawl</button>
-                <button>Analyze</button>
+                <button onClick={this.handleOnClickCrawl}>Crawl</button>
+                <button onClick={this.handleOnClickAnalyze}>Analyze</button>
                 <button>Show result</button>
             </div>
         )
