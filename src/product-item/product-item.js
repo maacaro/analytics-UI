@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import { Link } from 'react-router-dom'
 
 export default class ProductItem extends React.Component{
     handleOnClickResults = async () => {
@@ -35,6 +36,7 @@ export default class ProductItem extends React.Component{
                 <button onClick={this.handleOnClickCrawl}>Crawl</button>
                 <button onClick={this.handleOnClickAnalyze}>Analyze</button>
                 <button onClick={this.handleOnClickResults}>Show result</button>
+                <Link to="/dashboard">Dashboard</Link>
             </div>
         )
     }

@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ProductForm from './product-form/product-form';
-import ProductItem from './product-item/product-item'
+import ProductList from'./product-list/product-list'
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+const Dashboard = () =>{
+  return (
+    <div>
+      DASHBOARD
+    </div>
+    )
+}
 
 class App extends Component {
   render() {
@@ -12,10 +21,14 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Amazon Reviews Analytics</h1>
         </header>
-        <main>
-          <ProductForm/>
-          <ProductItem asin={'1563118793'} name={'some name'}/>
-        </main>
+        <Router>
+          <main>
+            <ProductList/>
+            <div>
+              <Route path="/dashboard" component ={Dashboard}/>
+            </div>
+          </main>
+        </Router>
       </div>
     );
   }
