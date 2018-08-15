@@ -36,7 +36,7 @@ export default class ProductItem extends React.Component{
                 <button onClick={this.handleOnClickCrawl}>Crawl</button>
                 <button onClick={this.handleOnClickAnalyze}>Analyze</button>
                 <button onClick={this.handleOnClickResults}>Show result</button>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to={`/dashboard/${asin}`}>Dashboard</Link>
             </div>
         )
     }
