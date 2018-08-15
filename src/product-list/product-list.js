@@ -11,15 +11,17 @@ export default class ProductList extends React.Component{
     render(){
         const { products } = this.state
         return(
-            <div>
+            <section>
                 <ProductForm/>
-                <ul>
-                    { products.map(product => 
-                        <li>
-                            <ProductItem asin={product.asin} name={product.name}/>
-                        </li>)}
+                <ul className ={"productList"}>
+                    { 
+                        products.map(product => 
+                            <li key={product.asin}>
+                                <ProductItem asin={product.asin} name={product.name}/>
+                            </li>)
+                    }
                 </ul>
-            </div>
+            </section>
         )
     }
 }
