@@ -8,6 +8,12 @@ import Dashboard from '../dashboard/dashboard'
 
 describe('Dashboard',()=>{
     it('should call the analytics endpointfrom the analytics API',async ()=>{
+        axios.get.mockImplementationOnce(()=> Promise.resolve({
+            data:{
+                analysisByEntityType:[]
+            }
+        }))
+        
         const { getByText } = render(<Dashboard/>)
 
         wait()

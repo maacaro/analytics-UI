@@ -4,7 +4,7 @@ import React from 'react'
 import {render, fireEvent, cleanup, wait} from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import axios from 'axios'
-import ProductForm from '../product-form/product-form'
+import ProductForm from '../products/product-form/product-form'
 
 
 

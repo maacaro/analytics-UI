@@ -2,7 +2,7 @@ import React from 'react'
 import {render, fireEvent, cleanup, wait} from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import axios from 'axios'
-import ProductItem from '../product-item/product-item'
+import ProductItem from '../products/product-item/product-item'
 import {Link, Route, Router, Switch} from 'react-router-dom'
 import {createMemoryHistory} from 'history'
 
