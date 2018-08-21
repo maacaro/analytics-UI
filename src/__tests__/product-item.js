@@ -2,7 +2,19 @@ import React from 'react'
 import {render, fireEvent, cleanup, wait} from 'react-testing-library'
 import 'jest-dom/extend-expect'
 import axios from 'axios'
-import ProductItem from '../product-item/product-item'
+import ProductItem from '../products/product-item/product-item'
+import {Link, Route, Router, Switch} from 'react-router-dom'
+import {createMemoryHistory} from 'history'
+
+function renderWithRouter(
+    ui,
+    {route = '/', history = createMemoryHistory({initialEntries: [route]})} = {},
+  ) {
+    return {
+        ...render(<Router history={history}>{ui}</Router>),
+        history,
+    }
+  }
 
 afterEach(cleanup)
 
@@ -16,7 +28,7 @@ describe("ProductItem",()=>{
             'Authorization': 'Basic OTczZDlkOWFhN2NiNDkwMGFjYjU4M2IzYmQyOGQ4MDc6T1RjelpEbGtPV0ZoTjJOaU5Ea3dNR0ZqWWpVNE0ySXpZbVF5T0dRNE1EYzY='
         }
 
-        const { getByText } = render(<ProductItem asin={"1563118793"} name={"Ford book"}/>)
+        const { getByText } = renderWithRouter(<ProductItem asin={"1563118793"} name={"Ford book"}/>)
         
         axios.post.mockImplementationOnce(() => Promise.resolve({status: 'OK', jobId:'34443'}));
         
@@ -29,7 +41,7 @@ describe("ProductItem",()=>{
     it('should make an API call to the products/{asin}/reviews/analyze endpoint, when the user click on the analyze button',async()=>{
         const asin = '1563118793'
         const url = "https://maacaro-analytics-api.herokuapp.com/products/"+asin+"/reviews/analyze"
-        const { getByText } = render(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
+        const { getByText } = renderWithRouter(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
         axios.get.mockClear()
         axios.get.mockImplementationOnce(() => Promise.resolve({asin, entities:["list of entities"], sentiment:["sentiment object"]}));
 
@@ -42,7 +54,7 @@ describe("ProductItem",()=>{
     it('should make an API call to the products/{asin}/analytics endpoint, when the user click on the show result button',async()=>{
         const asin = '1563118793'
         const url = "https://maacaro-analytics-api.herokuapp.com/products/"+asin+"/analytics"
-        const { getByText } = render(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
+        const { getByText } = renderWithRouter(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
         axios.get.mockClear()
         axios.get.mockImplementationOnce(() => Promise.resolve({asin, entities:["list of entities"], sentiment:["sentiment object"]}));
 
