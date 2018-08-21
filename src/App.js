@@ -5,12 +5,33 @@ import axios from 'axios';
 import ProductList from './products/product-list/product-list'
 import Dashboard from './dashboard/dashboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import qs from 'qs'; 
 
 class App extends Component {
   state = {
     products:[]
   }
-
+  
+  handleSubmit = event => {
+    event.preventDefault()
+    const asin = event.target.elements.asin.value
+    const productName = event.target.elements.productName.value
+    const url = "https://maacaro-analytics-api.herokuapp.com/products"
+    const headers = {
+        'content-type': 'application/x-www-form-urlencoded',
+    }
+    const data = {
+      name: productName,
+      asin: asin  
+    }
+    axios.post(url,qs.stringify(data),{ headers })
+      .then(res =>{
+        console.log(res)
+        this.setState({
+          products:[...this.state.products, res.data]
+        })
+      }).catch(err => console.log(err))
+  }
   componentDidMount= async ()=>{
     const url = 'https://maacaro-analytics-api.herokuapp.com/products' 
     try {
@@ -26,14 +47,14 @@ class App extends Component {
   render() {
     const { products } = this.state
     return (
-      <div className="App">
+      <div>
         <header className="App-header">
           <h1 className="App-title">Amazon Reviews Analytics</h1>
         </header>
         <Router>
           <main>
             <Route exact path = "/" render={props => {
-                return(<ProductList products={products} />)
+                return(<ProductList products={products} onSubmit = {this.handleSubmit} />)
               }
             }/>
             <Route path="/dashboard/:asin" render ={ props =>{
