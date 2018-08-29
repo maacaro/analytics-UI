@@ -59,7 +59,7 @@ class Dashboard extends React.Component{
       .then((res)=> {
         const analysisByEntity = res.data.analysisByEntityType.map(
           analysis =>({ name:analysis[1], value: analysis[0] })
-        )
+        ).sort((entityA,entityB)=>entityB.value - entityA.value)
         this.setState({ pieChartData: analysisByEntity })
       })
       .catch((err)=> console.log(err))
