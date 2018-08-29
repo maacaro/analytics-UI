@@ -12,20 +12,16 @@ afterEach(cleanup)
 
 describe('Add Products',()=>{
     it('should make an API call',async ()=>{
-        const url = "https://maacaro-analytics-api.herokuapp.com/products"
-        axios.post.mockImplementationOnce(() => Promise.resolve({data: {greeting: 'hello there'}}));
-        const {getByText, getByLabelText } = render(<ProductForm url={url} />)
-        const asin = getByLabelText('Product asin:')
-        const productName = getByLabelText('Product Name:')
+        const onSubmit = jest.fn(()=>{});
+        const {getByText, getByPlaceholderText } = render(<ProductForm onSubmit = {onSubmit} />)
+        const asin = getByPlaceholderText('Asin')
 
         asin.value = "ASIN"
-        productName.value ="Product Name"
 
-        fireEvent.click(getByText('Add Product'))
+        fireEvent.click(getByText('Add'))
 
         await wait()
 
-        expect(axios.post).toHaveBeenCalledTimes(1)
-        expect(axios.post).toHaveBeenCalledWith(url,{asin: asin.value, name: productName.value})
+        expect(onSubmit).toHaveBeenCalledTimes(1)
     })
 })

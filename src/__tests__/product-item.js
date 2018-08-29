@@ -51,17 +51,4 @@ describe("ProductItem",()=>{
         expect(axios.get).toHaveBeenCalledTimes(1)
         expect(axios.get).toHaveBeenCalledWith(url)
     })
-    it('should make an API call to the products/{asin}/analytics endpoint, when the user click on the show result button',async()=>{
-        const asin = '1563118793'
-        const url = "https://maacaro-analytics-api.herokuapp.com/products/"+asin+"/analytics"
-        const { getByText } = renderWithRouter(<ProductItem asin={"1563118793"} name = {"ford book"}/>)
-        axios.get.mockClear()
-        axios.get.mockImplementationOnce(() => Promise.resolve({asin, entities:["list of entities"], sentiment:["sentiment object"]}));
-
-        fireEvent.click(getByText('Show result'))
-        wait()
-
-        expect(axios.get).toHaveBeenCalledTimes(1)
-        expect(axios.get).toHaveBeenCalledWith(url)
-    })
 })

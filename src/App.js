@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import ProductList from './products/product-list/product-list'
+import ProductForm from './products/product-form/product-form'
+import ProductItem from './products/product-item/product-item'
 import Dashboard from './dashboard/dashboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import qs from 'qs'; 
@@ -15,13 +16,11 @@ class App extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const asin = event.target.elements.asin.value
-    const productName = event.target.elements.productName.value
     const url = "https://maacaro-analytics-api.herokuapp.com/products"
     const headers = {
         'content-type': 'application/x-www-form-urlencoded',
     }
     const data = {
-      name: productName,
       asin: asin  
     }
     axios.post(url,qs.stringify(data),{ headers })
@@ -54,7 +53,23 @@ class App extends Component {
         <Router>
           <main>
             <Route exact path = "/" render={props => {
-                return(<ProductList products={products} onSubmit = {this.handleSubmit} />)
+                return(
+                  <React.Fragment>
+                    <section className={"form-section"}>
+                        <ProductForm onSubmit = { this.handleSubmit}/>
+                    </section>
+                    <section className={"list-section"}>    
+                        <ul className ={"productList"}>
+                            { 
+                                products.map(product => 
+                                    <li className={"item-list"}key={product.asin}>
+                                        <ProductItem asin={product.asin} name={product.name}/>
+                                    </li>)
+                            }
+                        </ul>
+                    </section>
+                  </React.Fragment>
+                )
               }
             }/>
             <Route path="/dashboard/:asin" render ={ props =>{

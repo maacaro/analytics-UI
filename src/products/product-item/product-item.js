@@ -31,15 +31,14 @@ export default class ProductItem extends React.Component{
     render(){
         const { asin , name } = this.props
         return(
-            <div className="flex-container">
+            <div className="item-container">
                 <div>
                     <label>{name} ({asin})</label>
                 </div>
                 <div>
-                    <button onClick={this.handleOnClickCrawl}>Crawl</button>
-                    <button onClick={this.handleOnClickAnalyze}>Analyze</button>
-                    <button onClick={this.handleOnClickResults}>Show result</button>
-                    <Link to={`/dashboard/${asin}`}>Dashboard</Link>
+                    <button onClick={this.handleOnClickCrawl} className = {"button button-crawl"}>Crawl</button>
+                    <button onClick={this.handleOnClickAnalyze} className = {"button"}>Analyze</button>
+                    <Link to={`/dashboard/${asin}`} className={"button link-dashboard"}>Dashboard</Link>
                 </div>
             </div>
         )

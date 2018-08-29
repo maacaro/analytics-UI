@@ -5,14 +5,13 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  padding: 15px;
+  color:  #333333;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 3.5em;
+  font-weight: normal;
 }
 
 .App-intro {
@@ -41,13 +40,14 @@ input[type=text] {
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 50vw;
 }
 
 
 section{
   padding: 20px;
   margin: 20px;
-  width: 70%;
+  width: 100%;
   margin: auto;
 }
 
@@ -61,22 +61,6 @@ section{
   background-color: #f2f2f2;
   padding: 20px;
 }
-.col-35 {
-  float: left;
-  width: 35%;
-  margin-top: 6px;
-}
-
-.col-65 {
-  float: left;
-  width: 65%;
-  margin-top: 6px;
-}
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 .productList{
   list-style-type:none;
@@ -87,17 +71,47 @@ section{
   padding: 0;
 }
 
-.flex-container {
+.item-container {
   display: flex;
+  margin: 5px 0px 5px 0px;
+  padding: 3px 0px 3px 0px;
+  color: #333333;
+  justify-content: space-between;
 }
 
 .item-list:nth-child(even) {
   background-color:#f2f2f2;  
 }
+.form-section{
+  display: flex;
+  justify-content: center;
+}
 
-@media screen and (max-width: 600px) {
-  .col-35, .col-65, input[type=submit] {
-      width: 100%;
-      margin-top: 0;
-  }
+.list-section{
+  display: flex;
+  justify-content: center;
+}
+
+
+.button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 4px 20px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-crawl{
+  background-color: #4CAF50;
+}
+
+.button:hover {opacity: 1}
+
+.link-dashboard {
+  background-color: #f44336;
 }
